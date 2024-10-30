@@ -1,120 +1,279 @@
 # **E-Bookstore Management System**
 
-## Description
+# Overview
 
-The E-Bookstore Management System is a software application designed to enhance the customer experience and streamline internal operations for an online e-bookstore. The system provides functionalities for managing e-books, customer accounts, shopping carts, orders, discounts, and invoice generation.
+This project is an implementation of an E-Bookstore Management System in Python. It is designed to enhance the customer experience and streamline internal operations for an e-bookstore. The system includes functionalities for e-book management, customer management, shopping cart operations, order processing, discount application, and invoice generation.
 
-# Key Features:
+# Features
+
+- E-Book Management: Add, modify, and remove e-books in the    store's catalog.
+- Customer Management: Create and manage customer accounts, including loyalty program membership.
+- Shopping Cart: Customers can add, update, and remove e-books in their shopping carts.
+- Order Processing: Create orders from shopping carts and process them for delivery.
+- Discounts and Pricing: Apply loyalty and bulk purchase discounts to eligible orders.
+- Payment and Invoicing: Generate invoices detailing itemized prices, discounts, VAT, and the final total.
+Project Structure
+
+**The project consists of two main Python files:**
+
+- main.py: Contains all the class definitions for the system.
+- test_cases.py: Contains test cases demonstrating all the program's features.
+
+**Class Descriptions**
+
+**EBook**
+Represents an e-book in the e-bookstore.
+
+Attributes:
+
+- __title: The title of the e-book.
+- __author: The author of the e-book.
+- __publication_date: The publication date of the e-book.
+- __genre: The genre of the e-book.
+- __price: The price of the e-book.
+
+Methods:
+
+- Getters and setters for each attribute.
+- __str__(): Returns a string representation of the e-book.
+  
+**EBookCatalog**
+
+Represents the e-book catalog in the e-bookstore.
+
+Attributes:
+
+- __ebooks: A list of EBook instances.
+Methods:
+- add_ebook(ebook): Adds an e-book to the catalog.
+- remove_ebook(ebook): Removes an e-book from the catalog.
+get_ebooks(): Returns the list of e-books.
+- __str__(): Returns a string representation of the catalog.
+Customer
+- Represents a customer of the e-bookstore.
+
+Attributes:
+
+- __name: The name of the customer.
+- __contact_info: The contact information of the customer.
+- __is_loyalty_member: Indicates if the customer is a loyalty program member.
+- __shopping_cart: An instance of ShoppingCart.
+  
+Methods:
+
+- Getters and setters for each attribute.
+- get_shopping_cart(): Returns the customer's shopping cart.
+- __str__(): Returns a string representation of the customer.
+
+**ShoppingCart**
+
+Represents a customer's shopping cart.
+
+Attributes:
+
+- __items: A dictionary mapping EBook instances to quantities.
+Methods:
+- add_item(ebook, quantity): Adds an e-book to the cart.
+- remove_item(ebook): Removes an e-book from the cart.
+- update_item(ebook, quantity): Updates the quantity of an e-book.
+- get_items(): Returns the items in the cart.
+get_total_price(): Calculates the total price of the items.
+- __str__(): Returns a string representation of the cart.
+
+**Discount (Abstract Class)**
+
+An abstract base class for discounts.
+
+Methods:
+
+- apply_discount(order): Abstract method to apply the discount to an order.
+
+**LoyaltyDiscount**
+
+A discount applied to loyalty program members.
+
+Attributes:
+
+- __discount_percentage: The discount percentage (10%).
+Methods:
+- apply_discount(order): Applies the loyalty discount.
+- __str__(): Returns a string representation of the discount.
+
+**BulkPurchaseDiscount**
+
+A discount applied to bulk purchases.
+
+Attributes:
+
+- __discount_percentage: The discount percentage (20%).
+Methods:
+
+- apply_discount(order): Applies the bulk purchase discount.
+- __str__(): Returns a string representation of the discount.
+
+**Order**
+
+Represents a customer's order.
+
+Attributes:
+
+- __order_date: The date the order was placed.
+- __items: The items included in the order.
+- __customer: The customer who placed the order.
+- __total_amount: The total amount for the order.
+- __discounts_applied: Discounts applied to the order.
+  
+Methods:
+
+- calculate_total(): Calculates the total amount.
+- apply_discounts(discounts): Applies discounts to the order.
+- Getters and setters for attributes.
+- deliver_ebooks(): Placeholder method for delivery.
+- __str__(): Returns a string representation of the order.
+
+**Invoice**
+
+Represents an invoice for an order.
+
+Attributes:
+
+- __order: The associated order.
+- __vat_rate: The VAT rate (8%).
+- __final_total: The final total including VAT.
+
+Methods:
+
+- generate_invoice(): Calculates the final total.
+- calculate_vat(): Calculates the VAT amount.
+- __str__(): Returns a string representation of the invoice.
+
+**Requirements**
+
+- Python Version: Python 3.6 or higher
+- Modules Used:
+    - abc
+    - datetime
+    - collections
+  
+**Setup Instructions**
+
+1. Clone the Repository
 
 
-# E-Book Management
+```bash
+      git clone <repository-url>
+      cd <repository-directory>
+```
 
-- Maintain a comprehensive catalog of e-books.
-- Store detailed information: title, author, publication date, genre, and price.
-- Add, modify, or remove e-books from the catalog.
+2. Ensure Python is Installed
 
-# Customer Management
+    Make sure Python 3.6 or higher is installed:
 
-- Create and manage customer accounts.
-- Store personal details: name and contact information.
-- Browse available e-books.
+```bash
+        python3 --version
+```
 
-# Shopping Cart and Orders
+**Running the Test Cases**
 
-- Add, remove, or update quantities of e-books in the shopping cart.
-- Place orders reflecting the selected e-books and quantities.
-- Instant delivery of e-books upon purchase completion.
+1. Navigate to the Project Directory
+   
 
-# Discounts and Pricing
+    Open a terminal and navigate to the directory containing main.py and test_cases.py.
 
-- Support flexible pricing and discount options.
-- Apply a 10% loyalty discount for loyalty program members.
-- Apply a 20% bulk purchase discount for orders of 5 or more e-books.
+2. Run the Test Cases
 
-# Payment and Invoicing
+    Execute the following command:
 
-- Generate invoices detailing itemized prices and discounts.
-- Apply a fixed VAT rate of 8% to all purchases.
-- Calculate the final total amount due.
+```bash
+    python3 test_cases.py
+```
 
-# Installation Instructions
+3. Review the Output
 
-# Prerequisites
+        The test cases will run and output results demonstrating the system's features.
 
-- Python 3.x installed on your system.
-- Git (optional, for cloning the repository).
 
-# Steps
+**Test Cases Overview**
 
-# Clone the Repository
+The test_cases.py script includes the following scenarios:
 
-Using Git (recommended):
+- E-Book Catalog Operations
 
-bash
-Copy code
-git clone <https://github.com/your-username/ebookstore-management-system.git>
-Or download the ZIP file from the repository and extract it to your desired location.
+    - Adding e-books to the catalog.
+    - Modifying an e-book's price.
+    - Removing an e-book from the catalog.
+  
+- Customer Account Operations
 
-# Navigate to the Project Directory
+    - Creating customer accounts.
+    - Modifying customer loyalty status.
 
-bash
-Copy code
-cd ebookstore-management-system
+- Shopping Cart Operations
 
-# Install Dependencies
+    - Adding e-books to shopping carts.
+    - Updating item quantities.
 
-There are no external dependencies required beyond the Python Standard Library.
+- Order Processing
 
-# Usage
+    - Creating orders from shopping carts.
+    - Applying discounts (loyalty and bulk purchase).
 
-# Running the Test Cases
+- Invoice Generation
 
-The system's features are demonstrated through test cases. Follow these steps to run them:
+    - Generating invoices with itemized prices, discounts, VAT, and totals.
 
-# Navigate to the tests Directory
+**Sample Output**
 
-bash
-Copy code
-cd tests
+When you run test_cases.py, you can expect output similar to:
 
-# Run the Test Script
+```sql
+E-Book Catalog:
+EBook(title='Python Programming', author='John Doe', publication_date='2020-01-01', genre='Programming', price=29.99)
+EBook(title='Data Science Essentials', author='Jane Smith', publication_date='2019-05-15', genre='Data Science', price=39.99)
+EBook(title='Machine Learning', author='Tom Brown', publication_date='2021-07-22', genre='Artificial Intelligence', price=49.99)
 
-bash
-Copy code
-python test_cases.py
-This script will execute a series of test cases demonstrating:
+Invoice for Customer 1:
+Invoice for Order Date: 2023-11-24 02:45:12.345678
+Customer: Alice
+Items:
+  Python Programming x2 @ 29.99 each
+  Data Science Essentials x1 @ 39.99 each
+Subtotal: 80.97
+VAT (8.0%): 6.48
+Total Amount Due: 87.45
+Discounts Applied: ['LoyaltyDiscount']
 
-Adding, modifying, and removing e-books in the catalog.
-Creating and updating customer accounts.
-Adding e-books to the shopping cart.
-Applying loyalty and bulk purchase discounts.
-Generating invoices with detailed pricing and discounts.
+Invoice for Customer 2:
+Invoice for Order Date: 2023-11-24 02:45:12.456789
+Customer: Bob
+Items:
+  Machine Learning x5 @ 49.99 each
+Subtotal: 199.96
+VAT (8.0%): 15.997
+Total Amount Due: 215.96
+Discounts Applied: ['BulkPurchaseDiscount']
 
-# Understanding the Code Structure
+Updated E-Book Price:
+EBook(title='Python Programming', author='John Doe', publication_date='2020-01-01', genre='Programming', price=24.99)
 
-Main Code (src/ Directory):
-ebook.py: Defines the EBook class representing an e-book.
-ebook_catalog.py: Manages the EBookCatalog class for the collection of e-books.
-customer.py: Contains the Customer class for customer account management.
-shopping_cart.py: Implements the ShoppingCart class for cart operations.
-order.py: Defines the Order class for processing orders.
-invoice.py: Contains the Invoice class for invoice generation.
-discount.py: Abstract base class Discount for discount mechanisms.
-loyalty_discount.py: Implements the LoyaltyDiscount class.
-bulk_purchase_discount.py: Implements the BulkPurchaseDiscount class.
-Testing Code (tests/ Directory):
+Updated E-Book Catalog:
+EBook(title='Python Programming', author='John Doe', publication_date='2020-01-01', genre='Programming', price=24.99)
+EBook(title='Data Science Essentials', author='Jane Smith', publication_date='2019-05-15', genre='Data Science', price=39.99)
 
-test_cases.py: Script containing test cases to demonstrate system features.
+Updated Customer Account:
+Customer(name='Bob', contact_info='bob@example.com', is_loyalty_member=True)
+```
 
-# Extending the System
+Note: Timestamps and exact values may vary due to the current 
+date and floating-point arithmetic.
 
-To extend or customize the system:
+**Extensibility**
 
-Add New Features: Implement additional classes or methods as needed.
-Enhance User Interaction: Integrate a user interface or command-line prompts.
-Connect to a Database: Modify the code to use a database for persistent storage.
-Implement Additional Discounts: Create new discount classes inheriting from Discount.
+- Adding New Discount Types: Extend the Discount abstract class.
+- Enhancing Customer Features: Implement additional attributes or methods in the Customer class.
+- Expanding E-Book Information: Add more attributes to the EBook class (e.g., ISBN, language).
 
-# Authors
 
-A@li_moh69
+**Contact**
+
+For questions or support, please contact aliuae6973@gmail.com.
