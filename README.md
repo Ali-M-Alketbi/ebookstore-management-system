@@ -274,6 +274,3 @@ date and floating-point arithmetic.
 - Expanding E-Book Information: Add more attributes to the EBook class (e.g., ISBN, language).
 
 
-**Contact**
-
-For questions or support, please contact aliuae6973@gmail.com.
